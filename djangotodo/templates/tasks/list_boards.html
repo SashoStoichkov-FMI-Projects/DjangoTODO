@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Boards{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Boards</h2>
+    <div class="row">
+        <div class="col-sm-12">
+            <a class="btn btn-primary" href="{% url 'tasks:create_board' %}" role="button">Create Board</a>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+        {% for board in boards %}
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ board.name }}</h5>
+                    <a href="{% url 'tasks:list_tasks' board.id %}" class="btn btn-primary">View Tasks</a>
+                    <a href="{% url 'tasks:update_board' board.id %}" class="btn btn-primary">Update Board</a>
+                    <a href="{% url 'tasks:delete_board' board.id %}" class="btn btn-danger alert-danger">Delete Board</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

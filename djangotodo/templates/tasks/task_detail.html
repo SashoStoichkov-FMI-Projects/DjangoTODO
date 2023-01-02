@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ task.name }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>{{ task.name }}</h2>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <a class="btn btn-primary" href="{% url 'tasks:update_task' task.id %}" role="button">Update Task</a>
+            <form method="post" action="{% url 'tasks:delete_task' task.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Delete Task</button>
+            </form>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <p>{{ task.description }}</p>
+            <p>{{ task.status }}</p>
+            <p>{{ task.due_date }}</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>Comments</h3>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Add Comment</button>
+            </form>
+        </div>
+
+        <div class="col-sm-12">
+            {% for comment in comments %}
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-text">{{ comment.text }}</p>
+
+                    <form method="post" action="{% url 'tasks:delete_comment' task.id comment.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Delete Comment</button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock content %}
