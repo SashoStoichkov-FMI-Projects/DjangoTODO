@@ -22,6 +22,7 @@
                     <h5 class="card-title">{{ board.name }}</h5>
                     <a href="{% url 'tasks:list_tasks' board.id %}" class="btn btn-primary">View Tasks</a>
                     <a href="{% url 'tasks:update_board' board.id %}" class="btn btn-primary">Update Board</a>
+                    <a href="{% url 'tasks:export_board' board.id %}" class="btn btn-primary">Export Board</a>
                     <a href="{% url 'tasks:delete_board' board.id %}" class="btn btn-danger alert-danger">Delete Board</a>
                 </div>
             </div>

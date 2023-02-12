@@ -6,6 +6,7 @@ urlpatterns = [
     path("boards", views.list_boards, name="list_boards"),
     path("boards/create", views.create_board, name="create_board"),
     path("boards/<int:pk>/update", views.update_board, name="update_board"),
+    path("boards/<int:pk>/export", views.export_board, name="export_board"),
     path("boards/<int:pk>/delete", views.delete_board, name="delete_board"),
     path("boards/<int:pk>/tasks", views.list_tasks, name="list_tasks"),
     path("boards/<int:pk>/tasks/create", views.create_task, name="create_task"),

@@ -19,6 +19,44 @@ def create_board(request):
     return render(request, "tasks/create_board.html", {"form": form})
 
 
+def export_board(request, pk):
+    board = Board.objects.get(pk=pk)
+    tasks = Task.objects.filter(board=board)
+    comments = Comment.objects.filter(task__in=tasks)
+    data = {
+        "board": {
+            "name": board.name,
+        },
+        "tasks": [
+            {
+                "name": task.name,
+                "description": task.description,
+                "status": task.status,
+                "comments": [
+                    {
+                        "text": comment.text,
+                    }
+                    for comment in comments
+                    if comment.task == task
+                ],
+            }
+            for task in tasks
+        ],
+    }
+    return render(request, "tasks/export_board.html", {"data": data})
+
+
+def import_board(request):
+    if request.method == "POST":
+        form = BoardForm(request.POST)
+        if form.is_valid():
+            board = form.save()
+            return redirect(f"/tasks/boards/{board.pk}/tasks")
+    else:
+        form = BoardForm()
+    return render(request, "tasks/import_board.html", {"form": form})
+
+
 def update_board(request, pk):
     board = Board.objects.get(pk=pk)
     if request.method == "POST":
