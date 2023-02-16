@@ -36,7 +36,7 @@ django-debug-toolbar = "==3.8.1"
 django-extensions = "==3.2.1"
 django-coverage-plugin = "==3.0.0"
 pytest-django = "==4.5.2"
-werkzeug = {version = "==2.2.2", extras = ["watchdog"]}
+werkzeug = {version = "==2.2.3", extras = ["watchdog"]}
 gunicorn = "==20.1.0"
 psycopg2 = "==2.9.5"
 collectfast = "==2.2.0"
