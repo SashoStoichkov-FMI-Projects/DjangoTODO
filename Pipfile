@@ -41,7 +41,7 @@ gunicorn = "==20.1.0"
 psycopg2 = "==2.9.5"
 collectfast = "==2.2.0"
 django-storages = {version = "==1.13.1", extras = ["boto3"]}
-django-anymail = {version = "==8.6", extras = ["mailgun"]}
+django-anymail = {version = "==9.1", extras = ["mailgun"]}
 
 [dev-packages]
 
